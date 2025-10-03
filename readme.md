@@ -6,4 +6,4 @@ This project contains a couple of exercises
 
 ## Student 
 
-- student, 
+- First name, Second name
