@@ -15,7 +15,7 @@ public class BankAccount {
     public void deposit(double amount){
         if(amount>=0){
              currentBalance=currentBalance+amount;
-             userTransactions[transitionsTracker]=+amount;
+             userTransactions[transitionsTracker]=amount;
              transitionsTracker++;
              System.out.println("the depositor's name : "+name+", the deposited amount : "+amount+" ,the new balance : "+currentBalance);
 

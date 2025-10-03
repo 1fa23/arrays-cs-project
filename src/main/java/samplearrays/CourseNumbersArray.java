@@ -6,15 +6,12 @@ public class CourseNumbersArray {
 
 
         int[] newRegestredCourses= new int[registeredCourses.length+1];
-        for(int i=0;i<registeredCourses.length;i++){
-            newRegestredCourses[i]=registeredCourses[i];
-
-        }
+        System.arraycopy(registeredCourses, 0, newRegestredCourses, 0, registeredCourses.length);
         int newCourse=10;
         newRegestredCourses[registeredCourses.length]=newCourse;
         System.out.println("The courses : ");
-        for(int i=0;i<newRegestredCourses.length;i++){
-            System.out.println(newRegestredCourses[i]);
+        for (int newRegestredCours : newRegestredCourses) {
+            System.out.println(newRegestredCours);
         }
 
         int specificCourse=2080;
@@ -31,8 +28,8 @@ public class CourseNumbersArray {
     }
 
     public static boolean findCourse(int[]courses,int courseNumber){
-        for (int i=0;i<courses.length;i++){
-            if(courses[i]==courseNumber){
+        for (int course : courses){
+            if(course==courseNumber){
                 return true;
             }
 

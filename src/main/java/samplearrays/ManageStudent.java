@@ -1,6 +1,6 @@
 package samplearrays;
 
-
+@SuppressWarnings("ALL")
 public class ManageStudent {
 
     // 2) Find the Oldest Student
@@ -21,8 +21,8 @@ public class ManageStudent {
     // 3) Count Adult Students (age >= 18)
     public static int countAdults(Student[] students) {
         int count=0;
-        for(int i=0;i<students.length;i++){
-            if(students[i].getAge()>=18){
+        for(Student student : students){
+            if(student.getAge()>=18){
                 count++;
             }
         }
@@ -32,17 +32,16 @@ public class ManageStudent {
     // 4) Average Grade (returns NaN if no students or grades)
     public static double averageGrade(Student[] students) {
         int sumGrade=0;
-        for(int i=0;i<students.length;i++){
-            sumGrade +=students[i].getGrade();
+        for(Student student : students){
+            sumGrade +=student.getGrade();
         }
         return (double)sumGrade/students.length;
     }
 
     // 5) Search by Name (case-sensitive; change to equalsIgnoreCase if desired)
     public static Student findStudentByName(Student[] students, String name) {
-        for (int i = 0; i < students.length; i++) {
-            if (students[i].getName() == name) {
-                Student student = students[i];
+        for (Student student : students) {
+            if (student.getName().equalsIgnoreCase(name)) {
                 return student;
             }
         }
@@ -74,9 +73,9 @@ public class ManageStudent {
     public static void printHighAchievers(Student[] students) {
 
         System.out.println("the achievers : ");
-        for(int i=0;i<students.length;i++){
-            if(students[i].getGrade()>=15){
-                System.out.println(students[i].getName());
+        for(Student student : students){
+            if(student.getGrade()>=15){
+                System.out.println(student.getName());
 
             }
         }
@@ -86,9 +85,9 @@ public class ManageStudent {
 
     // 8) Update Student Grade by id
     public static boolean updateGrade(Student[] students, int id, int newGrade) {
-        for(int i=0;i<students.length;i++){
-            if(students[i].getId()==id){
-                students[i].setGrade(newGrade);
+        for(Student student : students){
+            if(student.getId()==id){
+                student.setGrade(newGrade);
                 return true;
             }
         }
@@ -98,9 +97,9 @@ public class ManageStudent {
 
     // 9) Find Duplicate Names
     public static boolean hasDuplicateNames(Student[] students) {
-        for(int i=0;i<students.length;i++){
-            for(int j=0;j<students.length;j++){
-                if(students[i].getName()==students[j].getName()){
+        for(Student student : students){
+            for(Student student1 : students){
+                if(student.getName().equalsIgnoreCase(student1.getName())){
                     return true;
                 }
             }
@@ -164,6 +163,7 @@ public class ManageStudent {
         // 6) Sort by grade desc
         // sort function
         System.out.println("\n== Sorted by grade (desc) ==");
+        sortByGradeDesc(arr);
         for (Student s : arr) System.out.println(s);
 
         // 7) High achievers >= 15

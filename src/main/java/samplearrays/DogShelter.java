@@ -48,9 +48,9 @@ public class DogShelter {
 
     // Display all dog counts
     public static void displayDogs() {
-        Integer countdogs=Integer.valueOf(0);
-        for(int i=0;i<dogCounts.length;i++) {
-            countdogs=countdogs+dogCounts[i];
+        var countdogs=Integer.valueOf(0);
+        for (Integer dogCount : dogCounts) {
+            countdogs = countdogs + dogCount;
         }
         System.out.println("the total of dogs is : "+countdogs);
 
