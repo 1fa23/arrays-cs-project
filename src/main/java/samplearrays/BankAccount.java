@@ -7,7 +7,7 @@ public class BankAccount {
     //TO-DO: Initialize an Array with 1000 in size that stores Double called 'transactions' to keep track of the user's transactions
 
     public BankAccount(String name, int startingBalance){
-
+         System.out.println("Bank Account Constructor");
     }
 
     public void deposit(double amount){
