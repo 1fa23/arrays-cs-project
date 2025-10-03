@@ -54,6 +54,10 @@ public class DogShelter {
         }
         System.out.println("the total of dogs is : "+countdogs);
 
+
+
+
+
+
     }
 }
-
