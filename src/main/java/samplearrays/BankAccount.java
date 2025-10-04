@@ -13,7 +13,7 @@ public class BankAccount {
     }
 
     public void deposit(double amount){
-        if(amount>=0){
+        if(amount>0){
             currentBalance=currentBalance+amount;
             userTransactions[transitionsTracker]=amount;
             transitionsTracker++;
@@ -21,14 +21,14 @@ public class BankAccount {
 
         }
         else {
-            System.out.println("invalid amount , currentBalance can not be changed");
+            System.out.println("invalid amount , currentBalance can not be changed (the amount is negative or greater than the availble balance");
         }
     }
 
 
 
     public void withdraw(double amount){
-        if(amount>=0 && amount<=currentBalance){
+        if(amount>0 && amount<=currentBalance){
             currentBalance=currentBalance-amount;
             userTransactions[transitionsTracker]=-amount;
             transitionsTracker++;
@@ -45,7 +45,12 @@ public class BankAccount {
     public void displayTransactions(){
         System.out.println("The transactions : ");
         for (int i=0;i< transitionsTracker;i++){
-            System.out.println(userTransactions[i]+" , ");
+            if(userTransactions[i]>0){
+                System.out.println("Deposit :"+userTransactions[i]);
+            }
+            else {
+                System.out.println("withdraw :"+userTransactions[i]);
+            }
 
         }
 

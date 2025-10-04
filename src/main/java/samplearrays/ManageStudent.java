@@ -52,19 +52,14 @@ public class ManageStudent {
     // 6) Sort Students by Grade (descending)
     public static void sortByGradeDesc(Student[] students) {
         for (int i=0;i<students.length;i++){
-            for(int j=0;j<i;j++){
-                if(students[i].getGrade()>students[j].getGrade()){
-                    Student a=students[i];
-                    students[i]=students[j];
-                    students[j]=a;
-
-                }
-                else {
+            for(int j=i;j<students.length;j++){
+                if(students[i].getGrade()<students[j].getGrade()){
                     Student a=students[j];
                     students[j]=students[i];
                     students[i]=a;
 
                 }
+
             }
         }
     }
@@ -72,10 +67,10 @@ public class ManageStudent {
     // 7) Print High Achievers (grade >= 15)
     public static void printHighAchievers(Student[] students) {
 
-        System.out.println("the achievers : ");
+
         for(Student student : students){
             if(student.getGrade()>=15){
-                System.out.println(student.getName());
+                System.out.println(student);
 
             }
         }
@@ -97,9 +92,9 @@ public class ManageStudent {
 
     // 9) Find Duplicate Names
     public static boolean hasDuplicateNames(Student[] students) {
-        for(Student student : students){
-            for(Student student1 : students){
-                if(student.getName().equalsIgnoreCase(student1.getName())){
+        for(int i=0;i<students.length;i++){
+            for(int j=i+1;j<students.length;j++){
+                if(students[i].getName().equalsIgnoreCase(students[j].getName())){
                     return true;
                 }
             }
@@ -121,14 +116,65 @@ public class ManageStudent {
 
     }
 
+    public static Student[][] createSchool(Student[]  students){
+        Student[][] school =new Student[2][3];
+        int count=0;
+        for(int i=0;i< school.length;i++){
+            for(int j=0;j< school[i].length;j++){
+                if(count<students.length){
+                    school[i][j]=students[count];
+                    count++;
+                }
+
+
+            }
+        }
+
+        return school;
+
+    }
+
+    public static   Student[] findTopStudent(Student[][] school){
+        // we suppose that there is one topStudent in a class .
+        Student[] topStudents=new Student[school.length];
+        // the maximum number of top students is the number of the rows which the number of classes
+        int count=0;
+        for(int i=0;i< school.length;i++){
+            int highestGrade=-1;
+            for(int j=0;j<school[i].length;j++){
+                if(school[i][j]!=null && school[i][j].getGrade()>highestGrade){
+                    highestGrade=school[i][j].getGrade();
+                }
+            }
+
+            for(Student student : school[i]){
+                if(student!=null && student.getGrade()==highestGrade) {
+                    topStudents[i] = student;
+
+
+
+                }
+            }
+
+
+        }
+
+
+
+
+
+
+        return topStudents;
+    }
+
     // 1) Create an Array of Students + demos for all tasks
     public static void main(String[] args) {
         // Create & initialize array of 5 students
         Student student1=new Student(1,"farah");
         Student student2=new Student(2,"ibtissam");
         Student student3=new Student(3,"Sabah",18);
-        Student student4=new Student(4,"khadija",19,14);
-        Student student5=new Student(3,"malika",17);
+        Student student4=new Student(4,"khadija",19,16);
+        Student student5=new Student(5,"malika",17);
 
         Student[] arr= {student1,student2,student3,student4,student5};
 
@@ -140,7 +186,7 @@ public class ManageStudent {
 
         // 2) Oldest
         Student oldestStudent=findOldest(arr);
-        System.out.println(oldestStudent);
+        System.out.println("Oldest Student : "+oldestStudent);
 
 
 
@@ -168,15 +214,31 @@ public class ManageStudent {
 
         // 7) High achievers >= 15
         System.out.println("\nHigh achievers:");
+        printHighAchievers(arr);
 
-        printHighAchievers(arr);        // 8) Update grade by id
+        // 8) Update grade by id
+
         // function
-        if (updateGrade(arr,1,18)){
-            Student updated=arr[1];
-            System.out.println("\nUpdated id=4? " + updated);
+        int id=1;
+        if (updateGrade(arr,id,18)){
+            for(Student student : arr){
+                if(student.getId()==id){
+                    Student updated=student;
+                    System.out.println("\nUpdated id=4? " + updated);
+
+                }
+            }
+
         }
 
-        System.out.println(findStudentByName(arr, "Dina"));
+
+        if(findStudentByName(arr, "Diana")==null){
+            System.out.println("There is no student with the name Dina");
+        }
+        else {
+            System.out.println(findStudentByName(arr, "Diana"));
+
+        }
 
         // 9) Duplicate names
         if(hasDuplicateNames(arr)){
@@ -193,6 +255,26 @@ public class ManageStudent {
         for( Student student : newArr){
             System.out.println(student);
         }
+
+        // 11) Display the school :
+        Student[][] school=createSchool(arr);
+        System.out.println("school");
+
+        for(int i=0;i<2;i++){
+            System.out.println("class :" +i);
+            for(int j=0;j<school[i].length;j++){
+                if(school[i][j]!=null){
+                    System.out.println(school[i][j]);
+                }
+            }
+        }
+
+        //find top student
+        Student[] students= findTopStudent(school);
+        for(int i=0;i<students.length;i++){
+            System.out.println("Top student in class "+i+":"+students[i]);
+        }
+
 
 
 
